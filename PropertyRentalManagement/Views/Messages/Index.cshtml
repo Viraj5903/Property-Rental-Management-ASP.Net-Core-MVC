@@ -1,0 +1,67 @@
+﻿@model IEnumerable<PropertyRentalManagement.Models.Message>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Message</a>
+</p>
+
+@if (Model.Count() == 0) // Check if the model is empty
+{
+    <h4>No Messages.</h4>
+    // Message to display when there are no results
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Subject)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MessageDateTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReceiverUser)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SenderUser)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MessageDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceiverUser.UserId) - @Html.DisplayFor(modelItem => item.ReceiverUser.FirstName) @Html.DisplayFor(modelItem => item.ReceiverUser.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SenderUser.UserId) - @Html.DisplayFor(modelItem => item.SenderUser.FirstName) @Html.DisplayFor(modelItem => item.SenderUser.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status.Description)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.MessageId" class="btn btn-info text-white">Read</a>
+            </td>
+        </tr>
+    }
+        </tbody>
+    </table>
+}

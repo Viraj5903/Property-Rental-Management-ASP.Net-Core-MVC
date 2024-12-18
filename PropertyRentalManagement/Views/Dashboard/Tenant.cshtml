@@ -1,0 +1,78 @@
+﻿@model User;
+
+@{
+    ViewData["Title"] = "Tenant";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center my-4">Welcome, Tenant</h1>
+
+<div class="container">
+    <div class="mt-4">
+        <h5 class="mb-4 text-center">Dashboard Metrics</h5>
+        <div class="row mb-4">
+            <div class="col-md-4 col-sm-12 mb-3">
+                <div class="card text-center" style="background-color: #e3f2fd;">
+                    <div class="card-body">
+                        <h5 class="card-title">Number of Unread Messages</h5>
+                        <p class="card-text display-4"><strong>@Model.MessageReceiverUsers.Where((m) => m.Status.Description == "Not Read").Count()</strong></p>
+                        <a href="@Url.Action("Index", "Messages")" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12 mb-3">
+                <div class="card text-center" style="background-color: #c8e6c9;">
+                    <div class="card-body">
+                        <h5 class="card-title">Number of Upcoming Appointments</h5>
+                        <p class="card-text display-4"><strong>@Model.AppointmentTenants.Where((a) => a.Status.Description == "Confirmed" && a.AppointmentDateTime >= DateTime.Now).Count()</strong></p>
+                        <a href="@Url.Action("Index", "Appointments")" class="btn btn-success">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4>Tenant Information</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+    </dl>
+</div>
+
+
+

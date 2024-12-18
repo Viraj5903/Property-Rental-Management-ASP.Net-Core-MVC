@@ -1,0 +1,108 @@
+﻿@model IEnumerable<PropertyRentalManagement.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Tenants</h1>
+
+<form asp-action="Index" method="post" class="mb-4">
+    <div class="d-flex flex-wrap align-items-center">
+        <div class="form-group mx-2">
+            <label class="control-label" for="searchBy">Search By:</label>
+            <select name="searchBy" id="searchBy" class="form-control" asp-items="ViewBag.SearchByList"></select>
+        </div>
+
+        <div class="form-group mx-2">
+            <label for="searchTerm" class="control-label">Search Term:</label>
+            <input name="searchTerm" id="searchTerm" class="form-control" placeholder="Search.." />
+        </div>
+
+        <div class="form-check mx-2">
+            <input type="checkbox" name="strictEquality" class="form-check-input" id="strictEquality" />
+            <label class="form-check-label" for="strictEquality">Strict Equality</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary mx-2">Search</button>
+    </div>
+    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        @* <div class="alert alert-danger" role="alert">
+            @ViewBag.ErrorMessage
+        </div> *@
+        <div class="d-block">
+            <span class="text-danger">@ViewBag.ErrorMessage</span>
+        </div>
+    }
+</form>
+
+<br />
+
+@if (Model.Count() == 0) // Check if the model is empty
+{
+    <h4>No records found.</h4> // Message to display when there are no results
+}
+else
+{
+    <table class="table list-table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Username)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Password)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.UserId" class="btn btn-success">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.UserId" class="btn btn-info text-white">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.UserId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+}

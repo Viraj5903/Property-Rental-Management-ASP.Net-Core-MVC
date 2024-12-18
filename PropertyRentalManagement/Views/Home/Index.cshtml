@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center" style="background-color: #f8f9fa; padding: 50px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);">
+    <h1 class="display-4" style="font-weight: bold; color: #343a40;">Welcome to the Property Rental Management System</h1>
+    <p style="font-size: 1.2rem; color: #6c757d; max-width: 800px; margin: auto;">
+        The Property Rental Management System (PRMS) is a web-based application designed to streamline the management of rental properties.
+        The system allows property owners, managers, and tenants to efficiently handle property listings, rental agreements, maintenance requests, appointments, and message management.
+    </p>
+    <img src="~/images/home-image.jpg" alt="Home Image" width="60%" height="auto" style="max-width: 300px" />
+    <div style="margin-top: 20px;">
+        <a href="@Url.Action("SignUp", "Access")" class="btn btn-primary btn-lg" style="padding: 10px 30px; border-radius: 25px; margin-right: 15px;">
+            Get Started
+        </a>
+        <a href="@Url.Action("Login", "Access")" class="btn btn-secondary btn-lg" style="padding: 10px 30px; border-radius: 25px;">
+            Login
+        </a>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+﻿@using System.Security.Claims;
+
+@model IEnumerable<PropertyRentalManagement.Models.Appointment>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    bool isManager = User.FindFirst(ClaimTypes.Role)?.Value == "Manager";
+}
+
+<h1>Index</h1>
+
+@if (!isManager)
+{
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Book An Appointment</a>
+    </p>
+}
+
+@if (Model.Count() == 0) // Check if the model is empty
+{
+    <h4>No Appointment.</h4>
+    // Message to display when there are no results
+}
+else
+{
+    <table class="table list-table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.AppointmentDateTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Apartment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Manager)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tenant)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AppointmentDateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apartment.ApartmentId) - @Html.DisplayFor(modelItem => item.Apartment.ApartmentCode) - @Html.DisplayFor(modelItem => item.Apartment.BuildingCode) @Html.DisplayFor(modelItem => item.Apartment.Building.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Manager.FirstName) @Html.DisplayFor(modelItem => item.Manager.LastName) 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tenant.FirstName) @Html.DisplayFor(modelItem => item.Tenant.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status.Description)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.AppointmentId" class="btn btn-info text-white">Details</a>
+                    @if (isManager)
+                    {
+                        <span>|</span> <a asp-action="Confirmed" asp-route-id="@item.AppointmentId" class="btn btn-success">Confirm</a>
+                        <span>|</span> <a asp-action="Canceled" asp-route-id="@item.AppointmentId" class="btn btn-danger">Cancel</a>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

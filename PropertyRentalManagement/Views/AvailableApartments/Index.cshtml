@@ -1,0 +1,68 @@
+﻿@model IEnumerable<PropertyRentalManagement.Models.Apartment>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Available Apartment</h1>
+
+<table class="table list-table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ApartmentCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApartmentType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Building)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Building.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApartmentCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApartmentType.ApartmentTypeDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Building.BuildingCode) - @Html.DisplayFor(modelItem => item.Building.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Building.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status.Description)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.ApartmentId" class="btn btn-info text-white">Details</a> |
+                <a asp-controller="Appointments" asp-action="Create" asp-route-apartmentId="@item.ApartmentId" class="btn btn-primary">Book Appointment</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

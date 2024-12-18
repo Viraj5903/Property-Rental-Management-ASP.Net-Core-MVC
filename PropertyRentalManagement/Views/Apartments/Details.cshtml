@@ -1,0 +1,66 @@
+﻿@model PropertyRentalManagement.Models.Apartment
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Apartment</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ApartmentCode)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ApartmentCode)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Rent)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Rent)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ApartmentType.ApartmentTypeDescription)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ApartmentType.ApartmentTypeDescription)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Building)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Building.BuildingCode) - @Html.DisplayFor(model => model.Building.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Status.Description)
+        </dd>
+    </dl>
+    <div class="my-4">
+        <h5>Apartment Image</h5>
+        @if (Model.ApartmentImage != null)
+        {
+            <img src="data:image/png;base64,@Convert.ToBase64String(Model.ApartmentImage)" alt="@Model.ApartmentId" class="apartment-image" />
+        }
+        else
+        {
+            <span>No image available</span>
+        }
+    </div>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ApartmentId" class="btn btn-success" >Edit</a> |
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
