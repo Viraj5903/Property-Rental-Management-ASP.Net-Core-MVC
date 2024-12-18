@@ -1,0 +1,64 @@
+﻿@model PropertyRentalManagement.Models.Apartment
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Apartment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ApartmentId" />
+            <div class="form-group">
+                <label asp-for="ApartmentCode" class="control-label"></label>
+                <input asp-for="ApartmentCode" class="form-control" />
+                <span asp-validation-for="ApartmentCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BuildingCode" class="control-label"></label>
+                <select asp-for="BuildingCode" class="form-control" asp-items="ViewBag.BuildingCode"></select>
+                <span asp-validation-for="BuildingCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApartmentTypeId" class="control-label"></label>
+                <select asp-for="ApartmentTypeId" class="form-control" asp-items="ViewBag.ApartmentTypeId"></select>
+                <span asp-validation-for="ApartmentTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rent" class="control-label"></label>
+                <input asp-for="Rent" class="form-control" />
+                <span asp-validation-for="Rent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StatusId" class="control-label"></label>
+                <select asp-for="StatusId" class="form-control" asp-items="ViewBag.StatusId"></select>
+                <span asp-validation-for="StatusId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="ApartmentImage" class="control-label">Apartment Image</label>
+                <input type="file" name="ApartmentImage" class="form-control" />
+                <span asp-validation-for="ApartmentImage" class="text-danger"></span>
+                <div class="text-muted mt-2">Upload an image for the apartment. If you don't want to change the existing image, leave this field empty.</div>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
+

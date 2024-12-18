@@ -1,0 +1,45 @@
+﻿@model VMLogin;
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="login">
+    <h1>
+        Log In
+    </h1>
+    <form asp-action="Login" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Username" class="control-label"></label>
+            <input asp-for="Username" class="form-control" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password" class="control-label"></label>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="KeepLoggedIn" class="control-label">
+                <input type="checkbox" asp-for="KeepLoggedIn" />
+                Keep me logged In.
+            </label>
+        </div>
+        <br />
+        <div class="form-group">
+            <input type="submit" value="Login" class="btn btn-primary" />
+        </div>
+
+        <!-- Display error message from ViewData -->
+        @if (ViewData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">
+                @ViewData["ErrorMessage"]
+            </div>
+        }
+        <br />
+        <a asp-controller="Access" asp-action="SignUp" class="btn btn-primary">Sign Up</a>
+    </form>
+</div>
